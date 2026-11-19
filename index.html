@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LILA BLACK - Player Journey Tool</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <aside id="sidebar">
+      <h1>Player Journeys</h1>
+      <section>
+        <h2>Find a match</h2>
+        <label>Date
+          <select id="dateSelect"></select>
+        </label>
+        <label>Map
+          <select id="mapSelect"></select>
+        </label>
+        <label>Only matches with
+          <select id="filterSelect">
+            <option value="any">Anything</option>
+            <option value="bots">Bot paths recorded</option>
+            <option value="deaths">Any player death</option>
+            <option value="pvp">Human vs human kills</option>
+            <option value="storm">Storm deaths</option>
+          </select>
+        </label>
+        <label>Sort by
+          <select id="sortSelect">
+            <option value="time">Date</option>
+            <option value="events">Most events</option>
+            <option value="duration">Longest</option>
+          </select>
+        </label>
+        <div id="matchCount"></div>
+        <label>Match
+          <select id="matchSelect"></select>
+        </label>
+        <div class="nav">
+          <button id="prevBtn">&larr; Prev</button>
+          <button id="nextBtn">Next &rarr;</button>
+        </div>
+      </section>
+      <p id="info"></p>
+
+      <section>
+        <h2>Heatmap</h2>
+        <label>Layer
+          <select id="heatLayer">
+            <option value="off">Off</option>
+            <option value="traffic">Traffic (time spent)</option>
+            <option value="kills">Kill zones</option>
+            <option value="deaths">Death zones</option>
+            <option value="loot">Loot pickups</option>
+          </select>
+        </label>
+        <label>Scope
+          <select id="heatScope">
+            <option value="all">All matches on this map (uses Date)</option>
+            <option value="match">Only the selected match</option>
+          </select>
+        </label>
+        <label>Who
+          <select id="heatWho">
+            <option value="both">Humans + bots</option>
+            <option value="human">Humans only</option>
+            <option value="bot">Bots only</option>
+          </select>
+        </label>
+        <label>Opacity
+          <input type="range" id="heatOpacity" min="0.1" max="1" step="0.05" value="0.75" />
+        </label>
+        <div id="heatBar"></div>
+        <div id="heatInfo"></div>
+      </section>
+
+      <section>
+        <h2>Paths</h2>
+        <label class="check"><input type="checkbox" id="showHumans" checked />
+          <span class="dot human"></span> Human paths</label>
+        <label class="check"><input type="checkbox" id="showBots" checked />
+          <span class="dot bot"></span> Bot paths</label>
+      </section>
+
+      <section>
+        <h2>Events</h2>
+        <div id="eventToggles"></div>
+      </section>
+    </aside>
+    <main>
+      <div class="stage">
+        <canvas id="map" width="1024" height="1024"></canvas>
+        <div id="controls">
+          <button id="playBtn" title="Play / pause (Space)">&#9654;</button>
+          <input type="range" id="scrub" min="0" max="100" step="0.1" value="0" />
+          <span id="timeLabel">0:00 / 0:00</span>
+          <select id="speedSelect" title="Playback speed">
+            <option value="1">1x</option>
+            <option value="5">5x</option>
+            <option value="10" selected>10x</option>
+            <option value="30">30x</option>
+          </select>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
